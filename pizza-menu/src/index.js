@@ -74,11 +74,11 @@ function Menu() {
     <main className="menu">
       <h2> Our Menu </h2>
 
-      { <ul className="pizzas">
+      <ul className="pizzas">
       {pizzaData.map((pizza) => (
           (<Pizza pizzaObj= {pizza}  key= {pizza.name}/>) 
         ))}
-      </ul>}
+      </ul>
 
       {/* Same thing with Ternary operator
       {pizzaData.soldOut ? (<ul className="pizzas">
