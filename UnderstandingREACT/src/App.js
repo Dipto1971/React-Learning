@@ -1,7 +1,12 @@
-import Clock from './Components/Clock';
+import React from 'react';
+import Form from './Components/Form';
 
 function App() {
-    return <div><Clock language="bn-BD"> Dipto </Clock></div>
+    return (
+    <div>
+        <Form  />
+    </div>
+    )
 }
 
 export default App;
