@@ -10,30 +10,36 @@ export default class form extends React.Component {
     }
 
     handleChange = (e) => { 
-        if(e.target.name === 'text'){
-            console.log(e.target.value);  
-            this.setState({
-                text: e.target.value
-            })
-        } 
-        else if(e.target.name === 'title'){
-            console.log(e.target.value);
-            this.setState({
-                title: e.target.value
-            })
-        } 
-        else if(e.target.name === 'library'){
-            console.log(e.target.value);
-            this.setState({
-                library: e.target.value
-            })
-        }
-        else if(e.target.name === 'isAwesome'){
-            console.log(e.target.checked);
-            this.setState({
-                isAwesome: e.target.checked,
-            })
-        }
+        this.setState({
+            [e.target.name] : e.target.value,
+            //e.target.name will dynamically change the state and will work for all the fields
+        })
+
+        // if(e.target.name === 'text'){
+        //     console.log(e.target.value);  
+        //     this.setState({
+        //         text: e.target.value
+        //     })
+        // } 
+        // else if(e.target.name === 'title'){
+        //     console.log(e.target.value);
+        //     this.setState({
+        //         title: e.target.value
+        //     })
+        // } 
+        // else if(e.target.name === 'library'){
+        //     console.log(e.target.value);
+        //     this.setState({
+        //         library: e.target.value
+        //     })
+        // }
+        // else if(e.target.name === 'isAwesome'){
+        //     console.log(e.target.checked);
+        //     this.setState({
+        //         isAwesome: e.target.checked,
+        //     })
+        // }
+        // Doing like this is not a good practice because if we have 100 fields then we have to write 100 if else statements
     }
 
     submitHandler = (e) => {
