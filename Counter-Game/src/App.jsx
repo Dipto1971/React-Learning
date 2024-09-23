@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import { Card, Typography, Button } from "@mui/material";
-import { createContext, useContext } from "react";
-
-const CountContext = createContext();
+import { RecoilRoot, atom, useRecoilValue, useSetRecoilState } from "recoil";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <CountContext.Provider value={{
-      count: count,
-      setCount: setCount
-    }}>
+    <RecoilRoot>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card style={{ padding: 20, width: 500, verticalAlign: "center" }}>
           <Typography variant="h5">Welcome to the counter game</Typography>
@@ -21,7 +14,7 @@ function App() {
           <CountComponent />
         </Card>
       </div>
-    </CountContext.Provider>
+    </RecoilRoot>
   );
 }
 
@@ -35,10 +28,14 @@ function Buttons() {
 }
 
 function Increase() {
-  const {count, setCount} = useContext(CountContext);
+  const setCount = useSetRecoilState(countState);
   return (
     <div>
-      <Button variant={"contained"} onClick={() => setCount(count + 1)}>
+      <Button variant={"contained"} onClick={() => {
+        setCount((prevCount) => prevCount + 1);
+        // Passing a function as an argument to setCount 
+        // allows you to access the previous value of the state.
+      }}>
         Increase counter
       </Button>
     </div>
@@ -46,10 +43,12 @@ function Increase() {
 }
 
 function Decrease() {
-  const {count, setCount} = useContext(CountContext);
+  const setCount = useSetRecoilState(countState);
   return (
     <div>
-      <Button variant={"contained"} onClick={() => setCount(count - 1)}>
+      <Button variant={"contained"} onClick={() => {
+        setCount((prevCount) => prevCount - 1);
+      }}>
         Decrease counter
       </Button>
     </div>
@@ -57,7 +56,8 @@ function Decrease() {
 }
 
 function CountComponent() {
-  const {count} = useContext(CountContext);
+  const count = useRecoilValue(countState);
+
   return (
     <div>
       <Typography variant="h6" textAlign={"center"}>
@@ -68,3 +68,14 @@ function CountComponent() {
 }
 
 export default App;
+
+const countState = atom({
+  key: "countState",
+  default: 0,
+});
+
+
+// Using Recoil instead of Context or Prop drilling has following benefits:
+// In Context API or Prop drilling, if a component is re-rendered, 
+// all the components that are using the context or prop are also re-rendered.
+// But in Recoil, only the components that are using the state are re-rendered.
