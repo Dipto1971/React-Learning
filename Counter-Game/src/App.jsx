@@ -79,3 +79,4 @@ const countState = atom({
 // In Context API or Prop drilling, if a component is re-rendered, 
 // all the components that are using the context or prop are also re-rendered.
 // But in Recoil, only the components that are using the state are re-rendered.
+// It is highly performant and efficient.
